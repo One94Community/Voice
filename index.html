@@ -60,10 +60,10 @@
         }
 
         .live-display {
-            min-height: 200px;
+            min-height: 100px;
             border: 2px solid #dee2e6;
             border-radius: var(--border-radius);
-            padding: 1.5rem;
+            padding: 1rem;
             margin: 1rem 0;
             background-color: #ffffff;
             display: flex;
@@ -73,36 +73,36 @@
         }
 
         .live-text {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
             text-align: center;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .waveform-container {
-            height: 60px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
         }
 
         .wave-bar {
-            width: 6px;
-            height: 25px;
+            width: 5px;
+            height: 20px;
             background-color: var(--primary);
-            margin: 0 3px;
-            border-radius: 3px;
+            margin: 0 2px;
+            border-radius: 2px;
             animation: wave 1.2s ease-in-out infinite;
         }
 
-        .wave-bar:nth-child(2) { animation-delay: 0.1s; height: 20px; }
-        .wave-bar:nth-child(3) { animation-delay: 0.2s; height: 35px; }
-        .wave-bar:nth-child(4) { animation-delay: 0.3s; height: 45px; }
-        .wave-bar:nth-child(5) { animation-delay: 0.4s; height: 35px; }
-        .wave-bar:nth-child(6) { animation-delay: 0.5s; height: 20px; }
-        .wave-bar:nth-child(7) { animation-delay: 0.6s; height: 25px; }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; height: 16px; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; height: 28px; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; height: 35px; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; height: 28px; }
+        .wave-bar:nth-child(6) { animation-delay: 0.5s; height: 16px; }
+        .wave-bar:nth-child(7) { animation-delay: 0.6s; height: 20px; }
 
         @keyframes wave {
             0%, 100% { transform: scaleY(0.7); }
@@ -110,12 +110,13 @@
         }
 
         .btn-custom {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
             font-weight: 500;
             transition: var(--transition);
             border: none;
-            margin: 0.25rem;
+            margin: 0.2rem;
+            font-size: 0.95rem;
         }
 
         .btn-primary-custom {
@@ -151,12 +152,12 @@
 
         textarea {
             font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            border-radius: 8px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            border-radius: 6px;
             border: 2px solid #dee2e6;
-            padding: 1.25rem;
-            min-height: 300px;
+            padding: 1rem;
+            min-height: 250px;
             transition: var(--transition);
         }
 
@@ -166,11 +167,12 @@
         }
 
         .status-indicator {
-            padding: 0.75rem 1.25rem;
-            border-radius: 50px;
+            padding: 0.6rem 1rem;
+            border-radius: 25px;
             font-weight: 500;
             text-align: center;
-            margin: 1rem 0;
+            margin: 0.8rem 0;
+            font-size: 0.9rem;
         }
 
         .status-listening {
@@ -192,8 +194,8 @@
         }
 
         .draft-item {
-            border-radius: 8px;
-            margin-bottom: 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
             border: 1px solid #e9ecef;
             transition: var(--transition);
         }
@@ -208,36 +210,45 @@
             top: 20px;
             right: 20px;
             z-index: 1000;
-            min-width: 300px;
-            border-radius: 8px;
+            min-width: 280px;
+            border-radius: 6px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            font-size: 0.9rem;
         }
 
         .footer {
             text-align: center;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             color: #6c757d;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             border-top: 1px solid #e9ecef;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
             .header {
-                padding: 1.5rem 0;
+                padding: 1.2rem 0;
             }
             
             .live-text {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             
             textarea {
-                font-size: 1rem;
-                min-height: 250px;
+                font-size: 0.95rem;
+                min-height: 200px;
             }
             
             .btn-custom {
                 width: 100%;
-                margin: 0.25rem 0;
+                margin: 0.2rem 0;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .card-header {
+                padding: 1rem 1.25rem;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -248,10 +259,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h1 class="display-5 fw-bold mb-2">
+                    <h1 class="display-6 fw-bold mb-2">
                         <i class="fas fa-microphone-alt me-2"></i>Bengali Voice Typing
                     </h1>
-                    <p class="lead mb-0">Convert your voice to Bengali text in real-time</p>
+                    <p class="lead mb-0 fs-6">Convert your voice to Bengali text in real-time</p>
                 </div>
             </div>
         </div>
@@ -259,7 +270,7 @@
 
     <div class="container">
         <!-- Live Recording Section -->
-        <div class="row mb-4">
+        <div class="row mb-3">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
@@ -284,20 +295,22 @@
                             </div>
                         </div>
 
-                        <div class="status-indicator status-stopped" id="status">
-                            <i class="fas fa-info-circle me-2"></i>Click "Start Recording" to begin
-                        </div>
-
                         <div class="text-center">
-                            <button class="btn btn-custom btn-primary-custom" id="startBtn">
-                                <i class="fas fa-microphone me-2"></i>Start Recording
-                            </button>
-                            <button class="btn btn-custom btn-danger-custom" id="stopBtn" disabled>
-                                <i class="fas fa-stop me-2"></i>Stop Recording
-                            </button>
-                            <button class="btn btn-custom btn-outline-custom" id="clearBtn">
-                                <i class="fas fa-trash me-2"></i>Clear All
-                            </button>
+                            <div class="status-indicator status-stopped" id="status">
+                                <i class="fas fa-info-circle me-1"></i>Click "Start Recording" to begin
+                            </div>
+
+                            <div>
+                                <button class="btn btn-custom btn-primary-custom" id="startBtn">
+                                    <i class="fas fa-microphone me-1"></i>Start
+                                </button>
+                                <button class="btn btn-custom btn-danger-custom" id="stopBtn" disabled>
+                                    <i class="fas fa-stop me-1"></i>Stop
+                                </button>
+                                <button class="btn btn-custom btn-outline-custom" id="clearBtn">
+                                    <i class="fas fa-trash me-1"></i>Clear
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -314,15 +327,15 @@
                     <div class="card-body">
                         <textarea class="form-control" id="textEditor" placeholder="Your converted text will appear here automatically... Start speaking to begin transcription!"></textarea>
                         
-                        <div class="text-center mt-4">
+                        <div class="text-center mt-3">
                             <button class="btn btn-custom btn-primary-custom" id="copyBtn">
-                                <i class="fas fa-copy me-2"></i>Copy Text
+                                <i class="fas fa-copy me-1"></i>Copy
                             </button>
                             <button class="btn btn-custom btn-outline-custom" id="saveBtn">
-                                <i class="fas fa-save me-2"></i>Save Draft
+                                <i class="fas fa-save me-1"></i>Save
                             </button>
                             <button class="btn btn-custom btn-outline-custom" id="shareBtn">
-                                <i class="fas fa-share-alt me-2"></i>Share Text
+                                <i class="fas fa-share-alt me-1"></i>Share
                             </button>
                         </div>
                     </div>
@@ -339,9 +352,9 @@
                     </div>
                     <div class="card-body">
                         <div id="draftsList">
-                            <div class="text-center py-4">
-                                <i class="fas fa-inbox fa-3x mb-3 text-muted"></i>
-                                <p class="text-muted mb-0">Saved drafts will appear here...</p>
+                            <div class="text-center py-3">
+                                <i class="fas fa-inbox fa-2x mb-2 text-muted"></i>
+                                <p class="text-muted mb-0 small">Saved drafts will appear here...</p>
                             </div>
                         </div>
                     </div>
@@ -384,7 +397,7 @@
 
         // Initialize Bootstrap Toast
         const toast = new bootstrap.Toast(notification, {
-            delay: 3000,
+            delay: 2500,
             autohide: true
         });
 
@@ -404,7 +417,7 @@
             recognition.onstart = function() {
                 isListening = true;
                 waveformContainer.style.display = 'flex';
-                status.innerHTML = '<i class="fas fa-microphone me-2"></i>Listening... Speak now in Bengali';
+                status.innerHTML = '<i class="fas fa-microphone me-1"></i>Listening... Speak now';
                 status.className = 'status-indicator status-listening';
                 startBtn.disabled = true;
                 stopBtn.disabled = false;
@@ -448,7 +461,7 @@
                 stopRecognition();
             };
         } else {
-            status.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Your browser does not support speech recognition';
+            status.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>Browser does not support speech recognition';
             status.className = 'status-indicator status-error';
             startBtn.disabled = true;
         }
@@ -477,7 +490,7 @@
                 recognition.stop();
                 isListening = false;
                 waveformContainer.style.display = 'none';
-                status.innerHTML = '<i class="fas fa-stop me-2"></i>Recording stopped';
+                status.innerHTML = '<i class="fas fa-stop me-1"></i>Recording stopped';
                 status.className = 'status-indicator status-stopped';
                 startBtn.disabled = false;
                 stopBtn.disabled = true;
@@ -543,9 +556,9 @@
             
             if (drafts.length === 0) {
                 draftsList.innerHTML = `
-                    <div class="text-center py-4">
-                        <i class="fas fa-inbox fa-3x mb-3 text-muted"></i>
-                        <p class="text-muted mb-0">Saved drafts will appear here...</p>
+                    <div class="text-center py-3">
+                        <i class="fas fa-inbox fa-2x mb-2 text-muted"></i>
+                        <p class="text-muted mb-0 small">Saved drafts will appear here...</p>
                     </div>
                 `;
                 return;
@@ -553,20 +566,20 @@
             
             draftsList.innerHTML = drafts.map(draft => `
                 <div class="card draft-item">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div class="card-body py-2 px-3">
+                        <div class="d-flex justify-content-between align-items-start mb-1">
                             <small class="text-muted">
                                 <i class="fas fa-calendar me-1"></i>${draft.created_at}
                             </small>
-                            <button class="btn btn-sm btn-danger" onclick="deleteDraft(${draft.id})">
+                            <button class="btn btn-sm btn-danger py-1 px-2" onclick="deleteDraft(${draft.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
-                        <div class="mb-3" style="font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;">
-                            ${draft.content.substring(0, 150)}${draft.content.length > 150 ? '...' : ''}
+                        <div class="mb-2 small" style="font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;">
+                            ${draft.content.substring(0, 100)}${draft.content.length > 100 ? '...' : ''}
                         </div>
                         <div class="text-end">
-                            <button class="btn btn-sm btn-outline-primary" onclick="loadDraft(${draft.id})">
+                            <button class="btn btn-sm btn-outline-primary py-1 px-2" onclick="loadDraft(${draft.id})">
                                 <i class="fas fa-download me-1"></i>Load
                             </button>
                         </div>
@@ -608,7 +621,7 @@
         }
 
         function showError(message) {
-            status.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i>${message}`;
+            status.innerHTML = `<i class="fas fa-exclamation-triangle me-1"></i>${message}`;
             status.className = 'status-indicator status-error';
             showNotification('Error', message, 'error');
         }
