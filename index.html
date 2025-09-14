@@ -16,9 +16,10 @@
             --danger: #dc3545;
             --warning: #ffc107;
             --info: #17a2b8;
-            --light: #f8f9fa;
-            --dark: #343a40;
-            --sidebar-width: 280px;
+            --dark: #212529;
+            --sidebar-width: 250px;
+            --sidebar-bg: #ffffff;
+            --sidebar-hover: #f8f9fa;
             --border-radius: 8px;
             --box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             --transition: all 0.3s ease;
@@ -32,16 +33,16 @@
             overflow-x: hidden;
         }
 
-        .main-layout {
+        .dashboard-layout {
             display: flex;
             min-height: 100vh;
         }
 
+        /* Sidebar Styles */
         .sidebar {
             width: var(--sidebar-width);
-            background: white;
+            background: var(--sidebar-bg);
             border-right: 1px solid #e9ecef;
-            padding: 1.5rem;
             box-shadow: var(--box-shadow);
             position: fixed;
             height: 100vh;
@@ -49,17 +50,55 @@
             z-index: 100;
         }
 
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #6c757d;
+            text-decoration: none;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--sidebar-hover);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+
+        .nav-link i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content Styles */
         .main-content {
             flex: 1;
             margin-left: var(--sidebar-width);
             padding: 1.5rem;
         }
 
-        .header {
-            background: linear-gradient(135deg, var(--primary), #3a0ca3);
-            color: white;
-            padding: 1.5rem;
-            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+        .content-header {
+            margin-bottom: 1.5rem;
         }
 
         .card {
@@ -72,7 +111,6 @@
 
         .card:hover {
             box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-            transform: translateY(-1px);
         }
 
         .card-header {
@@ -83,27 +121,32 @@
             font-size: 1.1rem;
         }
 
-        .transcript-display {
-            min-height: 120px;
+        /* Voice Typing Section Styles */
+        .live-display {
+            min-height: 150px;
             border: 2px solid #dee2e6;
             border-radius: var(--border-radius);
-            padding: 1rem;
+            padding: 1.5rem;
             margin: 1rem 0;
             background-color: #ffffff;
             font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             line-height: 1.6;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .btn-custom {
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
             font-weight: 500;
             transition: var(--transition);
             border: none;
-            margin: 0.2rem;
-            font-size: 0.9rem;
+            margin: 0.3rem;
+            font-size: 1rem;
         }
 
         .btn-primary-custom {
@@ -139,11 +182,11 @@
 
         textarea {
             font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             line-height: 1.6;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 2px solid #dee2e6;
-            padding: 1rem;
+            padding: 1.25rem;
             min-height: 300px;
             transition: var(--transition);
         }
@@ -154,12 +197,12 @@
         }
 
         .status-indicator {
-            padding: 0.5rem 0.8rem;
-            border-radius: 20px;
+            padding: 0.6rem 1rem;
+            border-radius: 25px;
             font-weight: 500;
             text-align: center;
-            margin: 0.6rem 0;
-            font-size: 0.85rem;
+            margin: 0.8rem 0;
+            font-size: 0.9rem;
         }
 
         .status-listening {
@@ -180,60 +223,98 @@
             color: var(--danger);
         }
 
-        .draft-item {
-            border-radius: 6px;
-            margin-bottom: 0.7rem;
-            border: 1px solid #e9ecef;
-            transition: var(--transition);
-        }
-
-        .draft-item:hover {
-            border-color: var(--primary);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
         .notification-toast {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
-            min-width: 260px;
-            border-radius: 6px;
+            min-width: 280px;
+            border-radius: 8px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            font-size: 0.85rem;
-        }
-
-        .setting-item {
-            margin-bottom: 1rem;
-        }
-
-        .setting-label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
             font-size: 0.9rem;
         }
 
-        .footer {
+        .stats-card {
             text-align: center;
-            padding: 1.2rem 0;
-            color: #6c757d;
-            margin-top: 1.2rem;
-            border-top: 1px solid #e9ecef;
-            font-size: 0.8rem;
+            padding: 1.25rem;
         }
 
+        .stats-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-label {
+            font-size: 0.95rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        /* Settings Section Styles */
+        .setting-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .setting-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .form-control, .form-select {
+            border-radius: 6px;
+            border: 2px solid #dee2e6;
+            padding: 0.75rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+        }
+
+        /* History Section Styles */
+        .history-item {
+            border-left: 3px solid var(--primary);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-date {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .history-content {
+            font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
         @media (max-width: 992px) {
             .sidebar {
-                width: 240px;
+                width: 220px;
             }
             
             .main-content {
-                margin-left: 240px;
+                margin-left: 220px;
             }
         }
 
         @media (max-width: 768px) {
-            .main-layout {
+            .dashboard-layout {
                 flex-direction: column;
             }
             
@@ -241,135 +322,182 @@
                 width: 100%;
                 position: relative;
                 height: auto;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
             }
             
             .main-content {
                 margin-left: 0;
             }
+            
+            .sidebar-nav {
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+            
+            .nav-item {
+                flex-shrink: 0;
+            }
+            
+            .nav-link {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                border-radius: 0;
+                white-space: nowrap;
+            }
+            
+            .nav-link.active {
+                border-left: none;
+                border-bottom: 3px solid var(--primary);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="main-layout">
-        <!-- Sidebar with Settings -->
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
         <div class="sidebar">
-            <h3 class="mb-4">
-                <i class="fas fa-cog me-2"></i>Settings
-            </h3>
-            
-            <!-- Voice Recording Controls -->
-            <div class="setting-item">
-                <h5 class="mb-3">
-                    <i class="fas fa-microphone me-2"></i>Voice Recording
-                </h5>
-                
-                <div class="transcript-display" id="transcriptDisplay">
-                    Speak to see live transcription...
-                </div>
-                
-                <div class="status-indicator status-stopped" id="status">
-                    <i class="fas fa-info-circle me-1"></i>Click "Start" to begin
-                </div>
-                
-                <div class="d-grid gap-2">
-                    <button class="btn btn-custom btn-primary-custom btn-sm" id="startBtn">
-                        <i class="fas fa-play me-1"></i>Start Recording
-                    </button>
-                    <button class="btn btn-custom btn-danger-custom btn-sm" id="stopBtn" disabled>
-                        <i class="fas fa-stop me-1"></i>Stop Recording
-                    </button>
-                    <button class="btn btn-custom btn-outline-custom btn-sm" id="clearBtn">
-                        <i class="fas fa-trash me-1"></i>Clear Transcript
-                    </button>
-                </div>
+            <div class="sidebar-header">
+                <h3 class="mb-0">
+                    <i class="fas fa-microphone me-2"></i>Voice Typing
+                </h3>
             </div>
             
-            <!-- Language Settings -->
-            <div class="setting-item">
-                <h5 class="mb-3">
-                    <i class="fas fa-language me-2"></i>Language
-                </h5>
-                <div class="setting-label">Select Input Language</div>
-                <select class="form-select form-select-sm" id="languageSelect">
-                    <option value="bn-BD">Bengali (বাংলা)</option>
-                    <option value="en-US">English (US)</option>
-                    <option value="en-GB">English (UK)</option>
-                    <option value="hi-IN">Hindi (हिन्दी)</option>
-                </select>
-            </div>
-            
-            <!-- Theme Settings -->
-            <div class="setting-item">
-                <h5 class="mb-3">
-                    <i class="fas fa-palette me-2"></i>Appearance
-                </h5>
-                <div class="setting-label">Theme</div>
-                <select class="form-select form-select-sm" id="themeSelect">
-                    <option value="light">Light Mode</option>
-                    <option value="dark">Dark Mode</option>
-                </select>
-            </div>
-            
-            <!-- Text Editor Actions -->
-            <div class="setting-item">
-                <h5 class="mb-3">
-                    <i class="fas fa-edit me-2"></i>Text Actions
-                </h5>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-custom btn-primary-custom btn-sm" id="copyBtn">
-                        <i class="fas fa-copy me-1"></i>Copy Text
-                    </button>
-                    <button class="btn btn-custom btn-outline-custom btn-sm" id="saveBtn">
-                        <i class="fas fa-save me-1"></i>Save Draft
-                    </button>
-                    <button class="btn btn-custom btn-outline-custom btn-sm" id="shareBtn">
-                        <i class="fas fa-share-alt me-1"></i>Share Text
-                    </button>
+            <div class="sidebar-nav">
+                <div class="nav-item">
+                    <a class="nav-link active" href="#" id="voiceTypingLink">
+                        <i class="fas fa-microphone"></i> Voice Typing
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="#" id="historyLink">
+                        <i class="fas fa-history"></i> History
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="#" id="settingsLink">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
                 </div>
             </div>
         </div>
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Header -->
-            <div class="header rounded">
+            <!-- Voice Typing Section (Default) -->
+            <div id="voiceTypingSection">
+                <div class="content-header">
+                    <h1 class="display-6 fw-bold mb-1">
+                        <i class="fas fa-microphone-alt me-2"></i>Voice Typing
+                    </h1>
+                    <p class="text-muted">Convert your voice to text in real-time</p>
+                </div>
+
                 <div class="row">
+                    <!-- Live Section -->
                     <div class="col-12">
-                        <h1 class="display-6 fw-bold mb-1">
-                            <i class="fas fa-microphone-alt me-2"></i>Bengali Voice Typing
-                        </h1>
-                        <p class="mb-0">Convert your voice to Bengali text in real-time</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Text Editor Section -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="fas fa-file-alt me-2"></i>Transcript Text
-                        </div>
-                        <div class="card-body">
-                            <textarea class="form-control" id="textEditor" placeholder="Your voice transcript will appear here automatically... Start speaking to begin transcription!"></textarea>
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-wave-square me-2"></i>Live Voice Recognition
+                            </div>
+                            <div class="card-body">
+                                <div class="live-display" id="liveDisplay">
+                                    Speak now to see live transcription...
+                                </div>
+                                
+                                <div class="status-indicator status-stopped" id="status">
+                                    <i class="fas fa-info-circle me-1"></i>Click "Start Listening" to begin voice recognition
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Drafts Section -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="fas fa-save me-2"></i>My Drafts
+                    <!-- Transcribed Text Section -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-file-alt me-2"></i>Transcribed Text
+                            </div>
+                            <div class="card-body">
+                                <textarea class="form-control" id="textEditor" placeholder="Your transcribed text will appear here... Start speaking to begin!"></textarea>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div id="draftsList">
-                                <div class="text-center py-3">
-                                    <i class="fas fa-inbox fa-2x mb-2 text-muted"></i>
-                                    <p class="text-muted mb-0 small">Saved drafts will appear here...</p>
+                    </div>
+
+                    <!-- Controls Section -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <button class="btn btn-custom btn-primary-custom me-3" id="startBtn">
+                                            <i class="fas fa-microphone me-2"></i>Start Listening
+                                        </button>
+                                        
+                                        <div class="d-flex align-items-center">
+                                            <label class="me-2 mb-0 fw-bold">Language:</label>
+                                            <select class="form-select" id="languageSelect" style="width: 200px;">
+                                                <option value="bn-BD">Bengali (বাংলা)</option>
+                                                <option value="en-US">English (US)</option>
+                                                <option value="en-GB">English (UK)</option>
+                                                <option value="hi-IN">Hindi (हिन्दी)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex flex-wrap">
+                                        <button class="btn btn-custom btn-outline-custom me-2" id="clearBtn">
+                                            <i class="fas fa-trash me-1"></i>Clear
+                                        </button>
+                                        <button class="btn btn-custom btn-outline-custom me-2" id="copyBtn">
+                                            <i class="fas fa-copy me-1"></i>Copy
+                                        </button>
+                                        <button class="btn btn-custom btn-outline-custom" id="saveBtn">
+                                            <i class="fas fa-save me-1"></i>Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Section -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stats-card">
+                                    <div class="stats-number" id="wordCount">0</div>
+                                    <div class="stats-label">Words</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stats-card">
+                                    <div class="stats-number" id="charCount">0</div>
+                                    <div class="stats-label">Characters</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stats-card">
+                                    <div class="stats-number" id="lineCount">0</div>
+                                    <div class="stats-label">Lines</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="stats-card">
+                                    <div class="stats-number" id="sentenceCount">0</div>
+                                    <div class="stats-label">Sentences</div>
                                 </div>
                             </div>
                         </div>
@@ -377,9 +505,129 @@
                 </div>
             </div>
 
-            <!-- Footer -->
-            <div class="footer">
-                <p class="mb-0">© 2023 Bengali Voice Typing - Convert your voice to Bengali text</p>
+            <!-- History Section (Hidden by default) -->
+            <div id="historySection" style="display: none;">
+                <div class="content-header">
+                    <h1 class="display-6 fw-bold mb-1">
+                        <i class="fas fa-history me-2"></i>History
+                    </h1>
+                    <p class="text-muted">Your voice typing history</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div id="historyList">
+                            <div class="text-center py-5">
+                                <i class="fas fa-history fa-3x mb-3 text-muted"></i>
+                                <p class="text-muted">No history available yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section (Hidden by default) -->
+            <div id="settingsSection" style="display: none;">
+                <div class="content-header">
+                    <h1 class="display-6 fw-bold mb-1">
+                        <i class="fas fa-cog me-2"></i>Settings
+                    </h1>
+                    <p class="text-muted">Configure your voice typing preferences</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-microphone-alt me-2"></i>Voice Settings
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-item">
+                                    <div class="setting-label">Default Language</div>
+                                    <select class="form-select" id="defaultLanguage">
+                                        <option value="bn-BD">Bengali (বাংলা)</option>
+                                        <option value="en-US">English (US)</option>
+                                        <option value="en-GB">English (UK)</option>
+                                        <option value="hi-IN">Hindi (हिन्दी)</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item">
+                                    <div class="setting-label">Voice Recognition Sensitivity</div>
+                                    <select class="form-select" id="sensitivity">
+                                        <option value="low">Low</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item">
+                                    <div class="setting-label">Auto Save Transcripts</div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="autoSave" checked>
+                                        <label class="form-check-label" for="autoSave">Enable auto save</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-palette me-2"></i>Appearance
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-item">
+                                    <div class="setting-label">Theme</div>
+                                    <select class="form-select" id="themeSelect">
+                                        <option value="light">Light Mode</option>
+                                        <option value="dark">Dark Mode</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item">
+                                    <div class="setting-label">Font Size</div>
+                                    <select class="form-select" id="fontSize">
+                                        <option value="small">Small</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="large">Large</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-info-circle me-2"></i>About
+                            </div>
+                            <div class="card-body">
+                                <h5>Bengali Voice Typing</h5>
+                                <p class="text-muted">Version 1.0.0</p>
+                                <p>Convert your voice to Bengali and other languages in real-time.</p>
+                                <hr>
+                                <p class="mb-1"><strong>Support:</strong></p>
+                                <p class="text-muted">support@voicetyping.com</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-save me-2"></i>Data Management
+                            </div>
+                            <div class="card-body">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-custom btn-outline-custom btn-sm" id="exportData">
+                                        <i class="fas fa-download me-1"></i>Export Data
+                                    </button>
+                                    <button class="btn btn-custom btn-danger-custom btn-sm" id="clearHistory">
+                                        <i class="fas fa-trash me-1"></i>Clear History
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -396,26 +644,94 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // DOM Elements
-        const transcriptDisplay = document.getElementById('transcriptDisplay');
+        const voiceTypingLink = document.getElementById('voiceTypingLink');
+        const historyLink = document.getElementById('historyLink');
+        const settingsLink = document.getElementById('settingsLink');
+        const voiceTypingSection = document.getElementById('voiceTypingSection');
+        const historySection = document.getElementById('historySection');
+        const settingsSection = document.getElementById('settingsSection');
+        
+        // Voice Typing Elements
+        const liveDisplay = document.getElementById('liveDisplay');
         const status = document.getElementById('status');
         const startBtn = document.getElementById('startBtn');
-        const stopBtn = document.getElementById('stopBtn');
         const clearBtn = document.getElementById('clearBtn');
         const textEditor = document.getElementById('textEditor');
         const copyBtn = document.getElementById('copyBtn');
         const saveBtn = document.getElementById('saveBtn');
-        const shareBtn = document.getElementById('shareBtn');
-        const draftsList = document.getElementById('draftsList');
+        const languageSelect = document.getElementById('languageSelect');
+        const wordCount = document.getElementById('wordCount');
+        const charCount = document.getElementById('charCount');
+        const lineCount = document.getElementById('lineCount');
+        const sentenceCount = document.getElementById('sentenceCount');
+        
+        // Settings Elements
+        const themeSelect = document.getElementById('themeSelect');
+        const defaultLanguage = document.getElementById('defaultLanguage');
+        const sensitivity = document.getElementById('sensitivity');
+        const autoSave = document.getElementById('autoSave');
+        const fontSize = document.getElementById('fontSize');
+        const exportData = document.getElementById('exportData');
+        const clearHistory = document.getElementById('clearHistory');
+        
+        // History Elements
+        const historyList = document.getElementById('historyList');
+        
+        // Notification Elements
         const notification = document.getElementById('notification');
         const notificationTitle = document.getElementById('notificationTitle');
         const notificationMessage = document.getElementById('notificationMessage');
-        const languageSelect = document.getElementById('languageSelect');
-        const themeSelect = document.getElementById('themeSelect');
 
         // Initialize Bootstrap Toast
         const toast = new bootstrap.Toast(notification, {
-            delay: 2500,
+            delay: 3000,
             autohide: true
+        });
+
+        // Navigation Functions
+        function showSection(section) {
+            // Hide all sections
+            voiceTypingSection.style.display = 'none';
+            historySection.style.display = 'none';
+            settingsSection.style.display = 'none';
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected section and mark nav link as active
+            switch(section) {
+                case 'voiceTyping':
+                    voiceTypingSection.style.display = 'block';
+                    voiceTypingLink.classList.add('active');
+                    break;
+                case 'history':
+                    historySection.style.display = 'block';
+                    historyLink.classList.add('active');
+                    loadHistory();
+                    break;
+                case 'settings':
+                    settingsSection.style.display = 'block';
+                    settingsLink.classList.add('active');
+                    break;
+            }
+        }
+
+        // Event Listeners for Navigation
+        voiceTypingLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('voiceTyping');
+        });
+
+        historyLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('history');
+        });
+
+        settingsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('settings');
         });
 
         // Speech Recognition Setup
@@ -435,9 +751,10 @@
                 isListening = true;
                 status.innerHTML = '<i class="fas fa-microphone me-1"></i>Listening... Speak now';
                 status.className = 'status-indicator status-listening';
-                startBtn.disabled = true;
-                stopBtn.disabled = false;
-                transcriptDisplay.innerHTML = '<span style="color: #4361ee;">Listening...</span>';
+                startBtn.innerHTML = '<i class="fas fa-microphone me-2"></i>Stop Listening';
+                startBtn.classList.remove('btn-primary-custom');
+                startBtn.classList.add('btn-danger-custom');
+                liveDisplay.innerHTML = '<span style="color: #4361ee;">Listening...</span>';
                 finalTranscriptBuffer = '';
             };
 
@@ -454,17 +771,18 @@
                     }
                 }
 
-                // Display live text in transcript display area
+                // Display live text in live display area
                 if (interimTranscript) {
-                    transcriptDisplay.innerHTML = `<span style="color: #4361ee;">${interimTranscript}</span>`;
+                    liveDisplay.innerHTML = `<span style="color: #4361ee;">${interimTranscript}</span>`;
                 } else if (finalTranscript) {
-                    transcriptDisplay.textContent = finalTranscript;
+                    liveDisplay.textContent = finalTranscript;
                 }
 
                 // Add to text editor
                 if (finalTranscript) {
                     finalTranscriptBuffer += finalTranscript;
                     textEditor.value = finalTranscriptBuffer;
+                    updateStats();
                 }
             };
 
@@ -482,17 +800,28 @@
             startBtn.disabled = true;
         }
 
-        // Event Listeners
-        startBtn.addEventListener('click', startRecognition);
-        stopBtn.addEventListener('click', stopRecognition);
+        // Voice Typing Event Listeners
+        startBtn.addEventListener('click', toggleRecognition);
         clearBtn.addEventListener('click', clearRecognition);
         copyBtn.addEventListener('click', copyToClipboard);
         saveBtn.addEventListener('click', saveText);
-        shareBtn.addEventListener('click', shareText);
         languageSelect.addEventListener('change', changeLanguage);
+        textEditor.addEventListener('input', updateStats);
+
+        // Settings Event Listeners
         themeSelect.addEventListener('change', changeTheme);
+        exportData.addEventListener('click', exportUserData);
+        clearHistory.addEventListener('click', clearAllHistory);
 
         // Speech Recognition Functions
+        function toggleRecognition() {
+            if (isListening) {
+                stopRecognition();
+            } else {
+                startRecognition();
+            }
+        }
+
         function startRecognition() {
             if (recognition) {
                 try {
@@ -508,19 +837,31 @@
             if (recognition && isListening) {
                 recognition.stop();
                 isListening = false;
-                status.innerHTML = '<i class="fas fa-stop me-1"></i>Recording stopped';
+                status.innerHTML = '<i class="fas fa-stop me-1"></i>Recognition stopped';
                 status.className = 'status-indicator status-stopped';
-                startBtn.disabled = false;
-                stopBtn.disabled = true;
-                transcriptDisplay.textContent = 'Speak to see live transcription...';
+                startBtn.innerHTML = '<i class="fas fa-microphone me-2"></i>Start Listening';
+                startBtn.classList.remove('btn-danger-custom');
+                startBtn.classList.add('btn-primary-custom');
+                liveDisplay.textContent = 'Speak now to see live transcription...';
             }
         }
 
         function clearRecognition() {
-            transcriptDisplay.textContent = 'Speak to see live transcription...';
+            liveDisplay.textContent = 'Speak now to see live transcription...';
             textEditor.value = '';
             finalTranscriptBuffer = '';
+            updateStats();
             showNotification('Success', 'Transcript cleared successfully');
+        }
+
+        function changeLanguage() {
+            if (isListening) {
+                stopRecognition();
+                setTimeout(() => {
+                    startRecognition();
+                }, 500);
+            }
+            showNotification('Success', `Language changed to ${languageSelect.options[languageSelect.selectedIndex].text}`);
         }
 
         // Text Management Functions
@@ -539,46 +880,93 @@
                 const draft = {
                     id: Date.now(),
                     content: textEditor.value,
-                    created_at: new Date().toLocaleString('en-US')
+                    created_at: new Date().toLocaleString('en-US'),
+                    language: languageSelect.options[languageSelect.selectedIndex].text
                 };
                 
-                let drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+                let drafts = JSON.parse(localStorage.getItem('voiceTypingDrafts') || '[]');
                 drafts.unshift(draft);
-                localStorage.setItem('drafts', JSON.stringify(drafts));
+                localStorage.setItem('voiceTypingDrafts', JSON.stringify(drafts));
                 
-                loadDrafts();
+                updateStats();
                 showNotification('Success', 'Text saved successfully!');
             } else {
                 showNotification('Error', 'No text to save', 'error');
             }
         }
 
-        function shareText() {
-            if (textEditor.value.trim()) {
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'Bengali Voice Typing',
-                        text: textEditor.value
-                    }).catch(console.error);
-                } else {
-                    copyToClipboard();
-                    showNotification('Success', 'Text copied! You can now share it');
-                }
-            } else {
-                showNotification('Error', 'No text to share', 'error');
+        function updateStats() {
+            const text = textEditor.value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const chars = text.length;
+            const lines = text.split('\n').length;
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+            
+            wordCount.textContent = words;
+            charCount.textContent = chars;
+            lineCount.textContent = lines;
+            sentenceCount.textContent = sentences;
+        }
+
+        // History Functions
+        function loadHistory() {
+            const drafts = JSON.parse(localStorage.getItem('voiceTypingDrafts') || '[]');
+            
+            if (drafts.length === 0) {
+                historyList.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-history fa-3x mb-3 text-muted"></i>
+                        <p class="text-muted">No history available yet</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            historyList.innerHTML = drafts.map(draft => `
+                <div class="history-item">
+                    <div class="history-header">
+                        <div class="history-date">
+                            <i class="fas fa-calendar me-1"></i>${draft.created_at}
+                        </div>
+                        <div class="history-language">
+                            <i class="fas fa-language me-1"></i>${draft.language}
+                        </div>
+                    </div>
+                    <div class="history-content">
+                        ${draft.content.substring(0, 200)}${draft.content.length > 200 ? '...' : ''}
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-sm btn-outline-primary me-2" onclick="loadHistoryItem(${draft.id})">
+                            <i class="fas fa-download me-1"></i>Load
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteHistoryItem(${draft.id})">
+                            <i class="fas fa-trash me-1"></i>Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadHistoryItem(id) {
+            const drafts = JSON.parse(localStorage.getItem('voiceTypingDrafts') || '[]');
+            const draft = drafts.find(d => d.id === id);
+            if (draft) {
+                textEditor.value = draft.content;
+                updateStats();
+                showSection('voiceTyping');
+                showNotification('Success', 'History item loaded successfully');
             }
         }
 
-        function changeLanguage() {
-            if (isListening) {
-                stopRecognition();
-                setTimeout(() => {
-                    startRecognition();
-                }, 500);
-            }
-            showNotification('Success', `Language changed to ${languageSelect.options[languageSelect.selectedIndex].text}`);
+        function deleteHistoryItem(id) {
+            let drafts = JSON.parse(localStorage.getItem('voiceTypingDrafts') || '[]');
+            drafts = drafts.filter(draft => draft.id !== id);
+            localStorage.setItem('voiceTypingDrafts', JSON.stringify(drafts));
+            loadHistory();
+            showNotification('Success', 'History item deleted successfully');
         }
 
+        // Settings Functions
         function changeTheme() {
             if (themeSelect.value === 'dark') {
                 document.body.classList.add('bg-dark');
@@ -586,7 +974,7 @@
                 document.querySelectorAll('.card, .sidebar').forEach(el => {
                     el.classList.add('bg-dark', 'text-white', 'border-secondary');
                 });
-                document.querySelectorAll('textarea, select').forEach(el => {
+                document.querySelectorAll('textarea, select, .form-control').forEach(el => {
                     el.classList.add('bg-dark', 'text-white', 'border-secondary');
                 });
             } else {
@@ -595,65 +983,32 @@
                 document.querySelectorAll('.card, .sidebar').forEach(el => {
                     el.classList.remove('bg-dark', 'text-white', 'border-secondary');
                 });
-                document.querySelectorAll('textarea, select').forEach(el => {
+                document.querySelectorAll('textarea, select, .form-control').forEach(el => {
                     el.classList.remove('bg-dark', 'text-white', 'border-secondary');
                 });
             }
             showNotification('Success', `Theme changed to ${themeSelect.value} mode`);
         }
 
-        function loadDrafts() {
-            const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-            
-            if (drafts.length === 0) {
-                draftsList.innerHTML = `
-                    <div class="text-center py-3">
-                        <i class="fas fa-inbox fa-2x mb-2 text-muted"></i>
-                        <p class="text-muted mb-0 small">Saved drafts will appear here...</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            draftsList.innerHTML = drafts.map(draft => `
-                <div class="card draft-item">
-                    <div class="card-body py-2 px-3">
-                        <div class="d-flex justify-content-between align-items-start mb-1">
-                            <small class="text-muted">
-                                <i class="fas fa-calendar me-1"></i>${draft.created_at}
-                            </small>
-                            <button class="btn btn-sm btn-danger py-1 px-2" onclick="deleteDraft(${draft.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                        <div class="mb-2 small" style="font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;">
-                            ${draft.content.substring(0, 100)}${draft.content.length > 100 ? '...' : ''}
-                        </div>
-                        <div class="text-end">
-                            <button class="btn btn-sm btn-outline-primary py-1 px-2" onclick="loadDraft(${draft.id})">
-                                <i class="fas fa-download me-1"></i>Load
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+        function exportUserData() {
+            const drafts = JSON.parse(localStorage.getItem('voiceTypingDrafts') || '[]');
+            const dataStr = JSON.stringify(drafts, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'voice-typing-data.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            showNotification('Success', 'Data exported successfully!');
         }
 
-        function loadDraft(id) {
-            const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-            const draft = drafts.find(d => d.id === id);
-            if (draft) {
-                textEditor.value = draft.content;
-                showNotification('Success', 'Draft loaded successfully');
+        function clearAllHistory() {
+            if (confirm('Are you sure you want to clear all history? This cannot be undone.')) {
+                localStorage.removeItem('voiceTypingDrafts');
+                loadHistory();
+                showNotification('Success', 'All history cleared successfully');
             }
-        }
-
-        function deleteDraft(id) {
-            let drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
-            drafts = drafts.filter(draft => draft.id !== id);
-            localStorage.setItem('drafts', JSON.stringify(drafts));
-            loadDrafts();
-            showNotification('Success', 'Draft deleted successfully');
         }
 
         // Utility Functions
@@ -678,7 +1033,8 @@
         }
 
         // Initialize
-        loadDrafts();
+        updateStats();
+        showSection('voiceTyping');
     </script>
 </body>
 </html>
