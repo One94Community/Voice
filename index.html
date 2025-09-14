@@ -165,12 +165,12 @@
 
         textarea {
             font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             line-height: 1.6;
             border-radius: 8px;
             border: 2px solid #dee2e6;
             padding: 1.5rem;
-            min-height: 400px;
+            min-height: 450px;
             transition: var(--transition);
         }
 
@@ -180,12 +180,32 @@
         }
 
         .status-indicator {
-            padding: 0.6rem 1rem;
+            padding: 0.8rem 1.2rem;
             border-radius: 25px;
             font-weight: 500;
-            text-align: center;
+            text-align: left;
             margin: 0.8rem 0;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
+            background-color: rgba(67, 97, 238, 0.05);
+            border: 1px solid rgba(67, 97, 238, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-indicator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .status-listening {
@@ -335,8 +355,8 @@
             }
             
             textarea {
-                font-size: 1.1rem;
-                min-height: 300px;
+                font-size: 1.2rem;
+                min-height: 350px;
             }
         }
     </style>
@@ -429,7 +449,7 @@
                                 </div>
                                 
                                 <div class="status-indicator status-stopped mt-3" id="status">
-                                    <i class="fas fa-info-circle me-1"></i>Click "Start Listening" to begin voice recognition
+                                    <i class="fas fa-info-circle me-2"></i>Click "Start Listening" to begin voice recognition
                                 </div>
                             </div>
                         </div>
@@ -711,6 +731,7 @@
         let recognition;
         let isListening = false;
         let finalTranscriptBuffer = '';
+        let isCleared = false;
 
         // Check for Speech Recognition API support
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
@@ -722,12 +743,15 @@
 
             recognition.onstart = function() {
                 isListening = true;
-                status.innerHTML = '<i class="fas fa-microphone me-1"></i>Listening... Speak now';
+                status.innerHTML = '<i class="fas fa-microphone me-2"></i>Listening... Speak now';
                 status.className = 'status-indicator status-listening';
                 startBtn.innerHTML = '<i class="fas fa-microphone me-2"></i>Stop Listening';
                 startBtn.classList.remove('btn-primary-custom');
                 startBtn.classList.add('btn-danger-custom');
-                finalTranscriptBuffer = '';
+                if (isCleared) {
+                    finalTranscriptBuffer = '';
+                    isCleared = false;
+                }
             };
 
             recognition.onresult = function(event) {
@@ -750,11 +774,11 @@
                     updateStats();
                 }
                 
-                // Show interim results in status
+                // Show interim results in status with light effect
                 if (interimTranscript) {
-                    status.innerHTML = `<i class="fas fa-microphone me-1"></i><span style="color: #4361ee;">${interimTranscript}</span>`;
+                    status.innerHTML = `<i class="fas fa-microphone me-2"></i><span style="color: #4361ee;">${interimTranscript}</span>`;
                 } else if (finalTranscript) {
-                    status.innerHTML = '<i class="fas fa-microphone me-1"></i>Listening... Speak now';
+                    status.innerHTML = '<i class="fas fa-microphone me-2"></i>Listening... Speak now';
                 }
             };
 
@@ -767,7 +791,7 @@
                 stopRecognition();
             };
         } else {
-            status.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>Browser does not support speech recognition';
+            status.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Browser does not support speech recognition';
             status.className = 'status-indicator status-error';
             startBtn.disabled = true;
         }
@@ -809,7 +833,7 @@
             if (recognition && isListening) {
                 recognition.stop();
                 isListening = false;
-                status.innerHTML = '<i class="fas fa-stop me-1"></i>Recognition stopped';
+                status.innerHTML = '<i class="fas fa-stop me-2"></i>Recognition stopped';
                 status.className = 'status-indicator status-stopped';
                 startBtn.innerHTML = '<i class="fas fa-microphone me-2"></i>Start Listening';
                 startBtn.classList.remove('btn-danger-custom');
@@ -820,6 +844,7 @@
         function clearRecognition() {
             textEditor.value = '';
             finalTranscriptBuffer = '';
+            isCleared = true;
             updateStats();
             showNotification('Success', 'Transcript cleared successfully');
         }
@@ -922,6 +947,7 @@
             const draft = drafts.find(d => d.id === id);
             if (draft) {
                 textEditor.value = draft.content;
+                finalTranscriptBuffer = draft.content;
                 updateStats();
                 showSection('voiceTyping');
                 showNotification('Success', 'History item loaded successfully');
@@ -997,7 +1023,7 @@
         }
 
         function showError(message) {
-            status.innerHTML = `<i class="fas fa-exclamation-triangle me-1"></i>${message}`;
+            status.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i>${message}`;
             status.className = 'status-indicator status-error';
             showNotification('Error', message, 'error');
         }
