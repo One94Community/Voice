@@ -122,23 +122,6 @@
         }
 
         /* Voice Typing Section Styles */
-        .live-display {
-            min-height: 150px;
-            border: 2px solid #dee2e6;
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin: 1rem 0;
-            background-color: #ffffff;
-            font-family: 'Kalpurush', 'SolaimanLipi', sans-serif;
-            font-size: 1.3rem;
-            line-height: 1.6;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
         .btn-custom {
             padding: 0.7rem 1.5rem;
             border-radius: 8px;
@@ -394,24 +377,6 @@
                 </div>
 
                 <div class="row">
-                    <!-- Live Section -->
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <i class="fas fa-wave-square me-2"></i>Live Voice Recognition
-                            </div>
-                            <div class="card-body">
-                                <div class="live-display" id="liveDisplay">
-                                    Speak now to see live transcription...
-                                </div>
-                                
-                                <div class="status-indicator status-stopped" id="status">
-                                    <i class="fas fa-info-circle me-1"></i>Click "Start Listening" to begin voice recognition
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Transcribed Text Section -->
                     <div class="col-12">
                         <div class="card">
@@ -456,6 +421,10 @@
                                             <i class="fas fa-save me-1"></i>Save
                                         </button>
                                     </div>
+                                </div>
+                                
+                                <div class="status-indicator status-stopped mt-3" id="status">
+                                    <i class="fas fa-info-circle me-1"></i>Click "Start Listening" to begin voice recognition
                                 </div>
                             </div>
                         </div>
@@ -652,7 +621,6 @@
         const settingsSection = document.getElementById('settingsSection');
         
         // Voice Typing Elements
-        const liveDisplay = document.getElementById('liveDisplay');
         const status = document.getElementById('status');
         const startBtn = document.getElementById('startBtn');
         const clearBtn = document.getElementById('clearBtn');
@@ -754,7 +722,6 @@
                 startBtn.innerHTML = '<i class="fas fa-microphone me-2"></i>Stop Listening';
                 startBtn.classList.remove('btn-primary-custom');
                 startBtn.classList.add('btn-danger-custom');
-                liveDisplay.innerHTML = '<span style="color: #4361ee;">Listening...</span>';
                 finalTranscriptBuffer = '';
             };
 
@@ -771,18 +738,18 @@
                     }
                 }
 
-                // Display live text in live display area
-                if (interimTranscript) {
-                    liveDisplay.innerHTML = `<span style="color: #4361ee;">${interimTranscript}</span>`;
-                } else if (finalTranscript) {
-                    liveDisplay.textContent = finalTranscript;
-                }
-
                 // Add to text editor
                 if (finalTranscript) {
                     finalTranscriptBuffer += finalTranscript;
                     textEditor.value = finalTranscriptBuffer;
                     updateStats();
+                }
+                
+                // Show interim results in status
+                if (interimTranscript) {
+                    status.innerHTML = `<i class="fas fa-microphone me-1"></i><span style="color: #4361ee;">${interimTranscript}</span>`;
+                } else if (finalTranscript) {
+                    status.innerHTML = '<i class="fas fa-microphone me-1"></i>Listening... Speak now';
                 }
             };
 
@@ -842,12 +809,10 @@
                 startBtn.innerHTML = '<i class="fas fa-microphone me-2"></i>Start Listening';
                 startBtn.classList.remove('btn-danger-custom');
                 startBtn.classList.add('btn-primary-custom');
-                liveDisplay.textContent = 'Speak now to see live transcription...';
             }
         }
 
         function clearRecognition() {
-            liveDisplay.textContent = 'Speak now to see live transcription...';
             textEditor.value = '';
             finalTranscriptBuffer = '';
             updateStats();
